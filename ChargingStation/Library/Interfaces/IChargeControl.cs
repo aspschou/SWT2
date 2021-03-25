@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library
+namespace Library.Interfaces
 {
-    interface IChargeControl
+    public interface IChargeControl
     {
         bool IsConnected();
         void StartCharge();
