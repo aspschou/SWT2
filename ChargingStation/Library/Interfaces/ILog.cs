@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Library.Interfaces
 {
-    interface ILog
+    public interface ILog
     {
-        public void LogDoorLocked(int Id);
-        public void LogDoorUnlocked(int Id);
+        void LogDoorLocked(int Id);
+        void LogDoorUnlocked(int Id);
     }
 }
