@@ -8,7 +8,7 @@ using Library.Interfaces;
 
 namespace Library
 {
-    class ChargeControl
+    public class ChargeControl : IChargeControl
     {
         private IUsbCharger _usbCharger;
         private IDisplay _display;
@@ -18,18 +18,18 @@ namespace Library
             _display = display;
         }
 
-        bool IsConnected()
+        public bool IsConnected()
         {
             return _usbCharger.Connected;
         }
 
 
-        void StartCharge()
+        public void StartCharge()
         {
             _usbCharger.StartCharge();
         }
 
-        void StopCharge()
+        public void StopCharge()
         {
             _usbCharger.StopCharge();
         }
@@ -38,20 +38,20 @@ namespace Library
         {
             if (e.Current == 0)
             {
-                _display.Display(MessageType.ConnectionError);
+                _display.DisplayMsg(MessageType.ConnectionError);
             }
             else if (0 < e.Current && e.Current < 5)
             {
-                _display.Display(MessageType.FullyCharged);
+                _display.DisplayMsg(MessageType.FullyCharged);
             }
             else if (5 < e.Current && e.Current < 500)
             {
-                _display.Display(MessageType.IsCharging);
+                _display.DisplayMsg(MessageType.IsCharging);
             }
             else if (e.Current > 500)
             {
                 StopCharge();
-                _display.Display(MessageType.CurrentWarning);
+                _display.DisplayMsg(MessageType.CurrentWarning);
             }
         }
     }
