@@ -12,9 +12,9 @@ namespace Library.Interfaces
         public int Id { set; get; }
     }
 
-    interface IRFIDReader
+    public interface IRFIDReader
     {
-        event EventHandler<RfidDetectedEventArgs> DetectIdEvent;
-        public void RfidDetected(int id);
+       public event EventHandler<RfidDetectedEventArgs> DetectIdEvent;
+        public void RfidDetected(int Id);
     }
 }
