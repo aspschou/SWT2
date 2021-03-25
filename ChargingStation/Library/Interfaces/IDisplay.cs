@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library
+namespace Library.Interfaces
 {
-    class IDisplay
+    public interface IDisplay
     {
+        void Display(Enum MessageType);
     }
 }
