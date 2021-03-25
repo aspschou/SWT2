@@ -4,9 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library
+namespace Library.Interfaces
 {
-    class IDoor
+    public interface IDoor
     {
+        void DoorOpened();
+        void DoorClosed();
+
+        void LockDoor();
+
+        void UnlockDoor();
+        
     }
 }
