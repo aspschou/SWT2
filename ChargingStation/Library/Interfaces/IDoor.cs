@@ -9,7 +9,7 @@ namespace Library.Interfaces
     public class DoorEventArgs : EventArgs
     {
         
-        public bool DoorOpen { set; get; }
+        public bool IsDoorOpen { set; get; }
     }
 
 

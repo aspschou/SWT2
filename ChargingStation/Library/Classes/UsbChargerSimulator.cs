@@ -1,6 +1,7 @@
 ﻿using Library.Interfaces;
 using System;
 using System.Timers;
+using Library.Interfaces;
 
 namespace UsbSimulator
 {
