@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library
+namespace Library.Interfaces
 {
-    class ILog
+    public interface ILog
     {
+        void LogDoorLocked(int Id);
+        void LogDoorUnlocked(int Id);
     }
 }

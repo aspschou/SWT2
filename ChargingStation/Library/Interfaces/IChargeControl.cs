@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library
+namespace Library.Interfaces
 {
-    class IChargeControl
+    public interface IChargeControl
     {
+        bool IsConnected();
+        void StartCharge();
+        void StopCharge();
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library
+namespace Library.Interfaces
 {
-    class IRFIDReader
+    interface IRFIDReader
     {
+        public void RfidDetected(int id);
     }
 }
