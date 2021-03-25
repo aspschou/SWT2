@@ -11,5 +11,6 @@ namespace Library.Interfaces
         bool IsConnected();
         void StartCharge();
         void StopCharge();
+        
     }
 }
