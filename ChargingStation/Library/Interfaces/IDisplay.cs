@@ -6,8 +6,21 @@ using System.Threading.Tasks;
 
 namespace Library.Interfaces
 {
+    public enum MessageType
+            {
+                ConnectPhone,
+                ScanRFID,
+                ConnectionError,
+                StationOccupied,
+                RFIDError,
+                TakePhone,
+                IsCharging,
+                FullyCharged,
+                CurrentWarning
+            };
+
     public interface IDisplay
     {
-        void Display(Enum MessageType);
+        public void DisplayMsg(MessageType messageType);
     }
 }
