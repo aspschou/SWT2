@@ -35,7 +35,7 @@ namespace Library
             {
                 case ChargingStationState.Available:
                     // Check for ladeforbindelse
-                    if (_charger.IsConnected())
+                    if (_charger.Connected())
                     {
                         _door.LockDoor();
                         _charger.StartCharge();
