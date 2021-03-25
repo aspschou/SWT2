@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class IChargeControl
+    interface IChargeControl
     {
+        bool IsConnected();
+        void StartCharge();
+        void StopCharge();
     }
 }
