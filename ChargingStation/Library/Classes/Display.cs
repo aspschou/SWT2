@@ -22,7 +22,7 @@ namespace Library
                     Console.WriteLine("Scan your RFID tag");
                     break;
                 case MessageType.ConnectionError:
-                    Console.WriteLine("Connection error");
+                    Console.WriteLine("Phone not properly connected, try again");
                     break;
                 case MessageType.StationOccupied:
                     Console.WriteLine("Station already in use");
