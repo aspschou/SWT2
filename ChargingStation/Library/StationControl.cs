@@ -4,14 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ladeskab.Interfaces;
+using Library.Interfaces;
 
 namespace Library
 {
     public class StationControl
     {
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
-        private enum LadeskabState
+        private enum ChargingStationState
         {
             Available,
             Locked,
@@ -19,7 +19,7 @@ namespace Library
         };
 
         // Her mangler flere member variable
-        private LadeskabState _state;
+        private ChargingStationState _state;
         private IChargeControl _charger;
         private int _oldId;
         private IDoor _door;
@@ -33,7 +33,7 @@ namespace Library
         {
             switch (_state)
             {
-                case LadeskabState.Available:
+                case ChargingStationState.Available:
                     // Check for ladeforbindelse
                     if (_charger.Connected)
                     {
@@ -46,7 +46,7 @@ namespace Library
                         }
 
                         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
-                        _state = LadeskabState.Locked;
+                        _state = ChargingStationState.Locked;
                     }
                     else
                     {
@@ -55,11 +55,11 @@ namespace Library
 
                     break;
 
-                case LadeskabState.DoorOpen:
+                case ChargingStationState.DoorOpen:
                     // Ignore
                     break;
 
-                case LadeskabState.Locked:
+                case ChargingStationState.Locked:
                     // Check for correct ID
                     if (id == _oldId)
                     {
@@ -71,7 +71,7 @@ namespace Library
                         }
 
                         Console.WriteLine("Tag din telefon ud af skabet og luk døren");
-                        _state = LadeskabState.Available;
+                        _state = ChargingStationState.Available;
                     }
                     else
                     {
