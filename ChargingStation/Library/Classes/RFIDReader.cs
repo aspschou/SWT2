@@ -7,7 +7,18 @@ using Library.Interfaces;
 
 namespace Library
 {
-    class RFIDReader
+    public class RFIDReader : IRFIDReader
     {
+        public event EventHandler<RfidDetectedEventArgs> DetectIdEvent;
+        
+        protected virtual void OnRfidRead(RfidDetectedEventArgs e)
+        {
+            DetectIdEvent?.Invoke(this, e);
+        }
+        public void RfidRead(int Id)
+        {
+            OnRfidRead(new RfidDetectedEventArgs { Id = Id });
+        }
+
     }
 }

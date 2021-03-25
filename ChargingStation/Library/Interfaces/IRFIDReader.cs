@@ -8,13 +8,13 @@ namespace Library.Interfaces
 {
     public class RfidDetectedEventArgs : EventArgs
     {
-
         public int Id { set; get; }
     }
 
     public interface IRFIDReader
     {
        public event EventHandler<RfidDetectedEventArgs> DetectIdEvent;
-        public void RfidDetected(int Id);
+        public void RfidRead(int Id);
     }
+
 }

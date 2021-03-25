@@ -17,6 +17,7 @@ namespace Library.Interfaces
     {
         event EventHandler<DoorEventArgs> DoorStateEvent;
         void DoorOpened();
+
         void DoorClosed();
 
         void LockDoor();

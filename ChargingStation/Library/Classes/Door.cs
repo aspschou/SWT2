@@ -7,7 +7,7 @@ using Library.Interfaces;
 
 namespace Library
 {
-    class Door
+    public class Door : IDoor
     {
+
     }
-}
