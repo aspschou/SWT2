@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.Interfaces;
+using System;
 using System.Timers;
 
 namespace UsbSimulator
