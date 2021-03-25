@@ -9,5 +9,10 @@ namespace Library
 {
     class Display
     {
+        public enum MessegeType
+        {
+           
+
+        }
     }
 }

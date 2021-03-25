@@ -23,8 +23,7 @@ namespace Library
         private IChargeControl _charger;
         private int _oldId;
         private IDoor _door;
-
-        private string logFile = "logfile.txt"; // Navnet på systemets log-fil
+        private ILog _log;
 
         // Her mangler constructor
 
@@ -40,10 +39,7 @@ namespace Library
                         _door.LockDoor();
                         _charger.StartCharge();
                         _oldId = id;
-                        using (var writer = File.AppendText(logFile))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", id);
-                        }
+                        _log.LogDoorLocked(id);
 
                         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
                         _state = ChargingStationState.Locked;
@@ -65,10 +61,7 @@ namespace Library
                     {
                         _charger.StopCharge();
                         _door.UnlockDoor();
-                        using (var writer = File.AppendText(logFile))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
-                        }
+                        _log.LogDoorUnlocked(id);
 
                         Console.WriteLine("Tag din telefon ud af skabet og luk døren");
                         _state = ChargingStationState.Available;
