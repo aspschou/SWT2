@@ -24,8 +24,9 @@ namespace Library
         private int _oldId;
         private IDoor _door;
         private ILog _log;
+        private IDisplay _display;
 
-        // Her mangler constructor
+        // Her mangler constructor 
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         private void RfidDetected(int id)
@@ -41,12 +42,12 @@ namespace Library
                         _oldId = id;
                         _log.LogDoorLocked(id);
 
-                        Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
+                        _display.DisplayMsg(MessageType.ScanRFID);
                         _state = ChargingStationState.Locked;
                     }
                     else
                     {
-                        Console.WriteLine("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
+                        _display.DisplayMsg(MessageType.ConnectionError);
                     }
 
                     break;
@@ -63,12 +64,13 @@ namespace Library
                         _door.UnlockDoor();
                         _log.LogDoorUnlocked(id);
 
-                        Console.WriteLine("Tag din telefon ud af skabet og luk døren");
+                        _display.DisplayMsg(MessageType.TakePhone);
+
                         _state = ChargingStationState.Available;
                     }
                     else
                     {
-                        Console.WriteLine("Forkert RFID tag");
+                        _display.DisplayMsg(MessageType.RFIDError);
                     }
 
                     break;
