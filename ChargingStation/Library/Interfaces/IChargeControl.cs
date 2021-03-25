@@ -8,8 +8,6 @@ namespace Library.Interfaces
 {
     public interface IChargeControl
     {
-        bool Connected { get; }
-
         bool IsConnected();
         void StartCharge();
         void StopCharge();
