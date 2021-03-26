@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Library;
-using UsbSimulator;
 
 namespace Application
 {
