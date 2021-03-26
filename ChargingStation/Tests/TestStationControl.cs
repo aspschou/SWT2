@@ -100,9 +100,18 @@ namespace Tests
 
         // Test for DoorOpened
         [Test]
-        public void RfidDetected_DoorOpened()
+        public void RfidDetected_WhileDoorOpened()
         {
-            _charger.IsConnected().Returns(true);
+            _door.DoorOpenedEvent += Raise.EventWith(new DoorOpenedEventArgs()); 
+            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() { Id = 2 });
+            
+            Assert.Multiple(() =>
+            {
+                _charger.DidNotReceive().StartCharge();
+                _charger.DidNotReceive().StopCharge();
+                _display.DidNotReceive().DisplayMsg(MessageType.RFIDError);
+                _display.DidNotReceive().DisplayMsg(MessageType.ConnectionError);
+            });
 
         }
 
