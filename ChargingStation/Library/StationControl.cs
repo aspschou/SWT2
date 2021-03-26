@@ -25,8 +25,20 @@ namespace Library
         private IDoor _door;
         private ILog _log;
         private IDisplay _display;
+        private IRFIDReader _rfidReader;
 
-        // Her mangler constructor 
+        public StationControl(IChargeControl Charger, IDoor Door, IRFIDReader RfidReader, IDisplay Display, ILog Log)
+        {
+            _charger = Charger;
+            _door = Door;
+            _rfidReader = RfidReader;
+            _log = Log;
+            _display = Display;
+            _state = ChargingStationState.Available;
+            _door.DoorOpenedEvent += new EventHandler<DoorOpenedEventArgs>(HandleDoorOpened);
+            _door.DoorClosedEvent += new EventHandler<DoorClosedEventArgs>(HandleDoorClosed);
+            _rfidReader.DetectIdEvent += new EventHandler<RfidDetectedEventArgs>(HandleRFIDDetected);
+        }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         private void RfidDetected(int id)
@@ -77,9 +89,9 @@ namespace Library
             }
         }
 
-        void DoorOpenedEvent(object sender, DoorOpenedEventArgs e)
+        void HandleDoorOpened(object sender, DoorOpenedEventArgs e)
         {
-            Console.WriteLine("Close Door test");
+            Console.WriteLine("Open Door test");
             if (_state == ChargingStationState.Locked)
                 Console.WriteLine("---Cant open Locked door---");
             else
@@ -90,7 +102,7 @@ namespace Library
             }
         }
 
-        void DoorClosedEvent(object sender, DoorClosedEventArgs e)
+        void HandleDoorClosed(object sender, DoorClosedEventArgs e)
         {
             Console.WriteLine("Close Door test");
             if (_state == ChargingStationState.DoorOpen)
@@ -102,8 +114,11 @@ namespace Library
 
             else
                 Console.WriteLine("---Cant close Closed door---");
-            
-            
+        }
+
+        void HandleRFIDDetected(object sender, RfidDetectedEventArgs e)
+        {
+            RfidDetected(e.Id);
         }
     }
 }

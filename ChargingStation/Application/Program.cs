@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Library;
+using UsbSimulator;
 
 namespace Application
 {
@@ -9,19 +11,26 @@ namespace Application
         {
             Door door = new Door();
             RFIDReader rfidReader = new RFIDReader();
+            Display display = new Display();
+            UsbChargerSimulator usbChargerSimulator = new UsbChargerSimulator();
+            Log log = new Log("file.txt");
+
+            ChargeControl chargeControl = new ChargeControl(display,usbChargerSimulator);
+            StationControl stationControl = new StationControl(chargeControl, door, rfidReader, display, log);
             // Assemble your system here from all the classes
+
 
             bool finish = false;
             do
             {
                 string input;
-                System.Console.WriteLine("Indtast E, O, C, R: ");
+                System.Console.WriteLine("Indtast F, O, C, R: ");
                 input = Console.ReadLine();
                 if (string.IsNullOrEmpty(input)) continue;
 
                 switch (input[0])
                 {
-                    case 'E':
+                    case 'F':
                         finish = true;
                         break;
 

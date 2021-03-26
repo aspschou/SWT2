@@ -7,7 +7,7 @@ using Library.Interfaces;
 
 namespace Library
 {
-     class Display : IDisplay
+    public class Display : IDisplay
     {
 
         public void DisplayMsg(MessageType messageType)

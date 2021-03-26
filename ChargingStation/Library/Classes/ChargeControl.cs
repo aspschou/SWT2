@@ -13,9 +13,11 @@ namespace Library
         private IUsbCharger _usbCharger;
         private IDisplay _display;
 
-        public ChargeControl(IDisplay display)
+        public ChargeControl(IDisplay display, IUsbCharger usbCharger)
         {
             _display = display;
+            _usbCharger = usbCharger;
+            _usbCharger.CurrentValueEvent += new EventHandler<CurrentEventArgs>(HandleNewCurrent);
         }
 
         public bool IsConnected()
@@ -34,11 +36,11 @@ namespace Library
             _usbCharger.StopCharge();
         }
 
-        void newCurrentEvent(object sender, CurrentEventArgs e)
+        void HandleNewCurrent(object sender, CurrentEventArgs e)
         {
             if (e.Current == 0)
             {
-                _display.DisplayMsg(MessageType.ConnectionError);
+                _display.DisplayMsg(MessageType.CurrentWarning);
             }
             else if (0 < e.Current && e.Current < 5)
             {
