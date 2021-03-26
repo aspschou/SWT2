@@ -19,7 +19,7 @@ namespace Library
                     Console.WriteLine("Connect your phone");
                     break;
                 case MessageType.ScanRFIDToOpen:
-                    Console.WriteLine("Scan your RFID tag to  open");
+                    Console.WriteLine("Scan your RFID tag to open");
                     break;
                 case MessageType.ScanRFIDToLock:
                     Console.WriteLine("Scan your RFID tag to lock");
