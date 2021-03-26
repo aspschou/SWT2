@@ -17,7 +17,7 @@ namespace Tests
         public void Setup()
         {
             _uut = new RFIDReader();
-            _uut.DetectIdEvent += (o, args) => _RFIDReaderEvent = args;;
+            _uut.DetectIdEvent += (o, args) => _RFIDReaderEvent = args;
         }
 
         [Test]
