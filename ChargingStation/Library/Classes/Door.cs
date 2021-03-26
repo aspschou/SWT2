@@ -20,7 +20,7 @@ namespace Library
 
         public void UnlockDoor()
         {
-            Console.WriteLine("Door is Unlocked");
+            Console.WriteLine("Door is unlocked");
         }
 
         public virtual void OnDoorOpened()
