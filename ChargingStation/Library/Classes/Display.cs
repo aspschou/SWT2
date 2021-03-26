@@ -18,8 +18,11 @@ namespace Library
                 case MessageType.ConnectPhone:
                     Console.WriteLine("Connect your phone");
                     break;
-                case MessageType.ScanRFID:
-                    Console.WriteLine("Scan your RFID tag");
+                case MessageType.ScanRFIDToOpen:
+                    Console.WriteLine("Scan your RFID tag to  open");
+                    break;
+                case MessageType.ScanRFIDToLock:
+                    Console.WriteLine("Scan your RFID tag to lock");
                     break;
                 case MessageType.ConnectionError:
                     Console.WriteLine("Phone not properly connected, try again");

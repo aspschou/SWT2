@@ -9,7 +9,8 @@ namespace Library.Interfaces
     public enum MessageType
             {
                 ConnectPhone,
-                ScanRFID,
+                ScanRFIDToOpen,
+                ScanRFIDToLock,
                 ConnectionError,
                 StationOccupied,
                 RFIDError,

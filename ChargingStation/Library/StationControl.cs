@@ -42,7 +42,7 @@ namespace Library
                         _oldId = id;
                         _log.LogDoorLocked(id);
 
-                        _display.DisplayMsg(MessageType.ScanRFID);
+                        _display.DisplayMsg(MessageType.ScanRFIDToOpen);
                         _state = ChargingStationState.Locked;
                     }
                     else
@@ -77,6 +77,33 @@ namespace Library
             }
         }
 
-        // Her mangler de andre trigger handlere
+        void DoorOpenedEvent(object sender, DoorOpenedEventArgs e)
+        {
+            Console.WriteLine("Close Door test");
+            if (_state == ChargingStationState.Locked)
+                Console.WriteLine("---Cant open Locked door---");
+            else
+            {
+                _state = ChargingStationState.DoorOpen;
+                if (!_charger.IsConnected())
+                    _display.DisplayMsg(MessageType.ConnectPhone);
+            }
+        }
+
+        void DoorClosedEvent(object sender, DoorClosedEventArgs e)
+        {
+            Console.WriteLine("Close Door test");
+            if (_state == ChargingStationState.DoorOpen)
+            {
+                _state = ChargingStationState.Available;
+                if(_charger.IsConnected())
+                    _display.DisplayMsg(MessageType.ScanRFIDToLock);
+            }
+
+            else
+                Console.WriteLine("---Cant close Closed door---");
+            
+            
+        }
     }
 }

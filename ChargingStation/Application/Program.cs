@@ -1,10 +1,14 @@
 ﻿using System;
+using Library;
+
 namespace Application
 {
     class Program
     {
         static void Main(string[] args)
         {
+            Door door = new Door();
+            RFIDReader rfidReader = new RFIDReader();
             // Assemble your system here from all the classes
 
             bool finish = false;
@@ -22,11 +26,11 @@ namespace Application
                         break;
 
                     case 'O':
-                        door.OnDoorOpen();
+                        door.OnDoorOpened();
                         break;
 
                     case 'C':
-                        door.OnDoorClose();
+                        door.OnDoorClosed();
                         break;
 
                     case 'R':
@@ -34,7 +38,7 @@ namespace Application
                         string idString = System.Console.ReadLine();
 
                         int id = Convert.ToInt32(idString);
-                        rfidReader.OnRfidRead(id);
+                        rfidReader.RfidRead(id);
                         break;
 
                     default:
