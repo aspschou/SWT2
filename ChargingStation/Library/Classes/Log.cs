@@ -30,12 +30,5 @@ namespace Library
                 writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", Id);
             }
         }
-
-        public class constructString
-        {
-            public constructString()
-            {
-            }
-        }
     }
 }
