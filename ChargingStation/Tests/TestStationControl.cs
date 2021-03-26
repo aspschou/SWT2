@@ -58,7 +58,7 @@ namespace Tests
             {
                 _charger.DidNotReceive().StartCharge();
                 _door.DidNotReceive().LockDoor();
-                _display.DidNotReceive().DisplayMsg(MessageType.ConnectionError);
+                _display.Received().DisplayMsg(MessageType.ConnectionError);
                 _log.DidNotReceive().LogDoorLocked(2);
             });
         }
@@ -93,7 +93,7 @@ namespace Tests
             {
                 _charger.DidNotReceive().StopCharge();
                 _door.DidNotReceive().UnlockDoor();
-                _display.DidNotReceive().DisplayMsg(MessageType.RFIDError);
+                _display.Received().DisplayMsg(MessageType.RFIDError);
                 _log.DidNotReceive().LogDoorUnlocked(2);
             });
         }
