@@ -118,10 +118,8 @@ namespace Tests
         [Test]
         public void CloseDoor_WhileDoorOpen()
         {
-            
-            var output = new StringWriter();
-            Console.SetOut(output);
             _door.DoorOpenedEvent += Raise.EventWith(new DoorOpenedEventArgs());
+            _charger.IsConnected().Returns(true);
             _door.DoorClosedEvent += Raise.EventWith(new DoorClosedEventArgs());
 
             _charger.Received().IsConnected();
