@@ -25,7 +25,6 @@ namespace Library
 
         public virtual void OnDoorOpened()
         {
-            Console.WriteLine("Invoke Open Door test");
             DoorOpenedEvent?.Invoke(this, new DoorOpenedEventArgs());
         }
 
