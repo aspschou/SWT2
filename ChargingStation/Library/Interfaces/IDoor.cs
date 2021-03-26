@@ -6,19 +6,27 @@ using System.Threading.Tasks;
 
 namespace Library.Interfaces
 {
-    public class DoorEventArgs : EventArgs
+    public class DoorOpenedEventArgs : EventArgs
     {
         
-        public bool IsDoorOpen { set; get; }
+        public bool DoorOpened { set; get; }
     }
 
+    public class DoorClosedEventArgs : EventArgs
+    {
+        public bool DoorClosed { set; get; }
+    }
 
     public interface IDoor
     {
-        event EventHandler<DoorEventArgs> DoorStateEvent;
-        void DoorOpened();
+        public event EventHandler<DoorOpenedEventArgs> DoorOpenedEvent;
 
-        void DoorClosed();
+        public event EventHandler<DoorClosedEventArgs> DoorClosedEvent;
+
+
+        void OnDoorOpened();
+
+        void OnDoorClosed();
 
         void LockDoor();
 

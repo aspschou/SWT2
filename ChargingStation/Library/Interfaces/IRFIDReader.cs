@@ -13,7 +13,7 @@ namespace Library.Interfaces
 
     public interface IRFIDReader
     {
-       public event EventHandler<RfidDetectedEventArgs> DetectIdEvent;
+        public event EventHandler<RfidDetectedEventArgs> DetectIdEvent;
         public void RfidRead(int Id);
     }
 
