@@ -91,7 +91,6 @@ namespace Library
 
         void HandleDoorOpened(object sender, DoorOpenedEventArgs e)
         {
-            Console.WriteLine("Open Door test");
             if (_state == ChargingStationState.Locked)
                 Console.WriteLine("---Cant open Locked door---");
             else
@@ -104,7 +103,6 @@ namespace Library
 
         void HandleDoorClosed(object sender, DoorClosedEventArgs e)
         {
-            Console.WriteLine("Close Door test");
             if (_state == ChargingStationState.DoorOpen)
             {
                 _state = ChargingStationState.Available;
