@@ -27,6 +27,7 @@ namespace Library
         private IDisplay _display;
         private IRFIDReader _rfidReader;
 
+
         public StationControl(IChargeControl Charger, IDoor Door, IRFIDReader RfidReader, IDisplay Display, ILog Log)
         {
             _charger = Charger;
@@ -91,9 +92,7 @@ namespace Library
 
         void HandleDoorOpened(object sender, DoorOpenedEventArgs e)
         {
-            if (_state == ChargingStationState.Locked)
-                Console.WriteLine("---Cant open Locked door---");
-            else
+            if(_state != ChargingStationState.Locked)
             {
                 _state = ChargingStationState.DoorOpen;
                 if (!_charger.IsConnected())
@@ -110,9 +109,6 @@ namespace Library
                 if(_charger.IsConnected())
                     _display.DisplayMsg(MessageType.ScanRFIDToLock);
             }
-
-            else
-                Console.WriteLine("---Cant close Closed door---");
         }
 
         void HandleRFIDDetected(object sender, RfidDetectedEventArgs e)

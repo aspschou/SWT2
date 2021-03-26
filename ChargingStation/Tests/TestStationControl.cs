@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Library;
 using NUnit.Framework;
@@ -36,7 +37,7 @@ namespace Tests
         public void RfidDetected_Available_IsConnected()
         {
             _charger.IsConnected().Returns(true);
-            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() { Id = 2 });
+            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() {Id = 2});
 
             Assert.Multiple(() =>
             {
@@ -52,7 +53,7 @@ namespace Tests
         public void RfidDetected_Available_IsNotConnected()
         {
             _charger.IsConnected().Returns(false);
-            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() { Id = 2 });
+            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() {Id = 2});
 
             Assert.Multiple(() =>
             {
@@ -69,8 +70,8 @@ namespace Tests
         public void RfidDetected_Locked_CorrectID()
         {
             _charger.IsConnected().Returns(true);
-            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() { Id = 2 });
-            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() { Id = 2 });
+            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() {Id = 2});
+            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() {Id = 2});
 
             Assert.Multiple(() =>
             {
@@ -86,8 +87,8 @@ namespace Tests
         public void RfidDetected_Locked_WrongID()
         {
             _charger.IsConnected().Returns(true);
-            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() { Id = 2 });
-            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() { Id = 5 });
+            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() {Id = 2});
+            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() {Id = 5});
 
             Assert.Multiple(() =>
             {
@@ -102,9 +103,9 @@ namespace Tests
         [Test]
         public void RfidDetected_WhileDoorOpened()
         {
-            _door.DoorOpenedEvent += Raise.EventWith(new DoorOpenedEventArgs()); 
-            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() { Id = 2 });
-            
+            _door.DoorOpenedEvent += Raise.EventWith(new DoorOpenedEventArgs());
+            _rfidReader.DetectIdEvent += Raise.EventWith(new RfidDetectedEventArgs() {Id = 2});
+
             Assert.Multiple(() =>
             {
                 _charger.DidNotReceive().StartCharge();
@@ -112,8 +113,18 @@ namespace Tests
                 _display.DidNotReceive().DisplayMsg(MessageType.RFIDError);
                 _display.DidNotReceive().DisplayMsg(MessageType.ConnectionError);
             });
-
         }
 
+        [Test]
+        public void CloseDoor_WhileDoorOpen()
+        {
+            
+            var output = new StringWriter();
+            Console.SetOut(output);
+            _door.DoorOpenedEvent += Raise.EventWith(new DoorOpenedEventArgs());
+            _door.DoorClosedEvent += Raise.EventWith(new DoorClosedEventArgs());
+
+            _charger.Received().IsConnected();
+        }
     }
 }
