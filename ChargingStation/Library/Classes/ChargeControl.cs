@@ -40,13 +40,13 @@ namespace Library
         {
             if (e.Current == 0)
             {
-                _display.DisplayMsg(MessageType.CurrentWarning);
+                _display.DisplayMsg(MessageType.ConnectionError);
             }
-            else if (0 < e.Current && e.Current < 5)
+            else if (0 < e.Current && e.Current <= 5)
             {
                 _display.DisplayMsg(MessageType.FullyCharged);
             }
-            else if (5 < e.Current && e.Current < 500)
+            else if (5 < e.Current && e.Current <= 500)
             {
                 _display.DisplayMsg(MessageType.IsCharging);
             }

@@ -56,10 +56,10 @@ namespace Tests
 
         // Test for forskellige currents
         [TestCase(0)]
-        public void ChargingCurrentValue_Zero(int _current)
+        public void ChargingCurrentValue_Zero(int current)
         {
             
-            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = _current});
+            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = current});
 
             _display.Received(1).DisplayMsg(MessageType.ConnectionError);
         }
@@ -67,9 +67,9 @@ namespace Tests
         [TestCase(1)]
         [TestCase(3)]
         [TestCase(5)]
-        public void ChargingCurrent_BelowFive(int _current)
+        public void ChargingCurrent_BelowFive(int current)
         {
-            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = _current });
+            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = current });
 
             _display.Received(1).DisplayMsg(MessageType.FullyCharged);
         }
@@ -77,17 +77,17 @@ namespace Tests
         [TestCase(100)]
         [TestCase(250)]
         [TestCase(500)]
-        public void ChargingCurrent_BetweenFiveandFiveHundred(int _current)
+        public void ChargingCurrent_BetweenFiveandFiveHundred(int current)
         {
-            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = _current });
+            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = current });
 
             _display.Received(1).DisplayMsg(MessageType.IsCharging);
         }
 
         [TestCase(550)]
-        public void ChargingCurrent_AboveFiveHundred(int _current)
+        public void ChargingCurrent_AboveFiveHundred(int current)
         {
-            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = _current });
+            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = current });
 
             _display.Received(1).DisplayMsg(MessageType.CurrentWarning);
         }
