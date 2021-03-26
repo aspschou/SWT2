@@ -101,6 +101,7 @@ namespace Library
             }
         }
 
+        
         void HandleDoorClosed(object sender, DoorClosedEventArgs e)
         {
             if (_state == ChargingStationState.DoorOpen)
